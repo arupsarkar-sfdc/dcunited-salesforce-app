@@ -1,0 +1,87 @@
+.slds-timeline {
+    position: relative;
+    max-width: 100%;
+}
+
+.slds-timeline:before {
+    content: '';
+    background: #dddbda;
+    height: 100%;
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    width: 2px;
+    transform: translateX(-50%);
+}
+
+.slds-timeline__item {
+    padding-left: 3rem;
+    padding-bottom: 1.5rem;
+    position: relative;
+}
+
+.slds-media__figure {
+    margin-right: 1rem;
+    position: absolute;
+    left: 0;
+}
+
+.timeline-icon {
+    background: white;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.slds-tabs_default__nav {
+    border-bottom: 2px solid #dddbda;
+    margin-bottom: 1rem;
+}
+
+.slds-tabs_default__item.slds-is-active {
+    color: #0070d2;
+    border-bottom: 3px solid #0070d2;
+}
+
+.slds-tabs_default__item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.slds-timeline__item_expandable {
+    position: relative;
+    padding-bottom: 1rem;
+    margin-left: 1.25rem;
+}
+
+.slds-timeline__icon {
+    margin-top: 0.25rem;
+}
+
+.slds-timeline__actions {
+    flex-shrink: 0;
+    padding-left: 1rem;
+}
+
+.slds-timeline__date {
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    color: #706e6b;
+}
+
+.slds-timeline__media-figure {
+    margin-right: 1rem;
+}
+
+.slds-button_icon {
+    margin-bottom: 0.25rem;
+}
+
+.slds-timeline__date-pill {
+    background-color: #EEF4FF;  /* Light blue background */
+    border-radius: 12px;        /* Rounded corners for pill effect */
+    padding: 4px 12px;          /* Spacing inside the pill */
+    display: inline-block;      /* Keep the pill width to content */
+    font-size: 0.875rem;        /* Maintain existing font size */
+    color: #0070D2;             /* Salesforce blue text color */
+    margin-left: auto;          /* Push to right side */
+}

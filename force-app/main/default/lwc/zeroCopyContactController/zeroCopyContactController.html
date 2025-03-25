@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Contact Transactions" icon-name="custom:custom2">
+        <!-- create a search field with slightly rounded corner with purple border placed in the middle of the screen-->
+        <div class="slds-m-around_medium">
+            <lightning-input label="Search" onchange={handleSearchChange} value={searchKey} class="slds-m-around_x-small"></lightning-input>
+            <!-- crate a lightning search button with search icon in the button-->
+            <lightning-button label="Search" onclick={searchTransactions} class="slds-m-around_x-small"></lightning-button>
+        </div>
+        <div class="slds-m-around_medium">
+            
+            <!-- <lightning-input label="Contact Id" value={contactId} onchange={handleContactIdChange}></lightning-input>
+            <lightning-button label="Copy Contact" onclick={copyContact}></lightning-button> -->
+            <!-- create a lightning data table -->
+            <template if:true={transactions}>
+                <lightning-datatable
+                    key-field="TransactionID"
+                    data={transactions}
+                    columns={columns}
+                    hide-checkbox-column="true">
+                </lightning-datatable>                
+            </template>
+            <!-- create a spinner-->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </template>
+                
+
+        </div>
+    </lightning-card>
+</template>

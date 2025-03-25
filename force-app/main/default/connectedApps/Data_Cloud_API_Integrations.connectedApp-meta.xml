@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>ryan.cox@salesforce.com</contactEmail>
+    <label>Data Cloud API Integrations</label>
+    <oauthConfig>
+        <callbackUrl>https://oauthdebugger.com/debug</callbackUrl>
+        <certificate>MIID7zCCAtegAwIBAgIUJ7Iq43xXV8mVtPkyaWFV0I1mtKIwDQYJKoZIhvcNAQELBQAwgZ8xCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJDTzESMBAGA1UEBwwJTmVkZXJsYW5kMRMwEQYDVQQKDApTYWxlc2ZvcmNlMRMwEQYDVQQLDApEYXRhIENsb3VkMR0wGwYDVQQDDBRkY3VuaXRlZC0wMzIxMjQtaG9tZTEmMCQGCSqGSIb3DQEJARYXcnlhbi5jb3hAc2FsZXNmb3JjZS5jb20wHhcNMjQwMzI3MDI1MzEyWhcNMjUwMzI3MDI1MzEyWjCBnzELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAkNPMRIwEAYDVQQHDAlOZWRlcmxhbmQxEzARBgNVBAoMClNhbGVzZm9yY2UxEzARBgNVBAsMCkRhdGEgQ2xvdWQxHTAbBgNVBAMMFGRjdW5pdGVkLTAzMjEyNC1ob21lMSYwJAYJKoZIhvcNAQkBFhdyeWFuLmNveEBzYWxlc2ZvcmNlLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALxFYo+7UWPWdtNwIyfjTBsXrSk/YBDLB1HpNQndBY+YcFuxFGNNGY888iET6ugrIO9xfScaodYM/e8NrqwuQXKWa8CQqFmOriFo6ryRNCSFUOSYEHGQuwMmU25jQmVgUURmx++JTN52Kc0tivQz+5vlrqiawiaZQbk/XuosvmtVPvNcB8nPXDMuX+W8E2zp8itJI2oM7cX/DRC9uaZUCZO0wb0aq1BnwWZs83MeS5EpXt3/ak9vwje7sktVUEiNufidBzosFB2L8iqTxeQh6yARMMd2Izz5TO3mXCiNoxlRhWOvhahQ4+tjrTRF2KExue0ZnBzOMhmv/GpxvcexlTkCAwEAAaMhMB8wHQYDVR0OBBYEFCULExmWe5txk3Jblg82qHMihueaMA0GCSqGSIb3DQEBCwUAA4IBAQBY1tvIAyjivUlCAVOQkIxfkjxCnkVmAfuq7rN3lzd9/+yToGKFyT22pcvxWw0jJSOhsj00yOaIU/yPsAJxGRh2LDql9CFOL23jnEwnCFp/GfYca89yCRxYXE5K1sTHPe5XgPpDB8aXoh3EpOJLlrv95lTFl0zDfyWMvV1iDKCXqs1C5DzsDNu4hcZTq9kGMXzJxJqeTB6i7gT57NUtz3amAB9DBvci/EVSQzcHl+n2FJR4Cy6khMgfUVNbjvsWk4mDC+1xm09xEwEKN57Xfq0RveswYZqe4aIZubmb38NUBuQM83kKXLl644qldDkvbrn36P3pX0Il0mBwhYqXpLHc</certificate>
+        <consumerKey>3MVG9H_KVs6V9LiNsSrq64m8gNFiNHKhtKa2OjfPZTL3XqJOrYQy5pC1NoCV6Np1ou6H_6Qh2ykY0Iigwyl6l</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isClientCredentialEnabled>false</isClientCredentialEnabled>
+        <isCodeCredentialEnabled>false</isCodeCredentialEnabled>
+        <isCodeCredentialPostOnly>false</isCodeCredentialPostOnly>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isNamedUserJwtEnabled>false</isNamedUserJwtEnabled>
+        <isPkceRequired>false</isPkceRequired>
+        <isRefreshTokenRotationEnabled>false</isRefreshTokenRotationEnabled>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <isSecretRequiredForTokenExchange>false</isSecretRequiredForTokenExchange>
+        <isTokenExchangeEnabled>false</isTokenExchangeEnabled>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+        <scopes>Web</scopes>
+        <scopes>RefreshToken</scopes>
+        <scopes>CDPIngest</scopes>
+        <scopes>CDPProfile</scopes>
+        <scopes>CDPQuery</scopes>
+        <scopes>CDPSegment</scopes>
+        <scopes>CDPIdentityResolution</scopes>
+        <scopes>CDPCalculatedInsight</scopes>
+        <scopes>CDP</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <isTokenExchangeFlowEnabled>false</isTokenExchangeFlowEnabled>
+        <refreshTokenPolicy>infinite</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>
