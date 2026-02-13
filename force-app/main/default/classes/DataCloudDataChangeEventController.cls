@@ -203,6 +203,83 @@ public with sharing class DataCloudDataChangeEventController {
         return result;
     }
 
+    /**
+     * Test entry point for Anonymous Apex - bypasses trigger/platform event
+     * 
+     * Usage:
+     *   // Option 1: With payload JSON string
+     *   DataCloudDataChangeEventController.processPayload('{"ssot__CaseId__c":"500al00000mfMVZAA2","ssot__Subject__c":"Test"}');
+     *   
+     *   // Option 2: Load from Debug_Log__c
+     *   Debug_Log__c log = [SELECT Body__c FROM Debug_Log__c WHERE Name = 'DBUG-0000501' LIMIT 1];
+     *   Map<String, Object> body = (Map<String, Object>) JSON.deserializeUntyped(log.Body__c);
+     *   DataCloudDataChangeEventController.processPayload((String) body.get('PayloadCurrentValue'));
+     */
+    public static void processPayload(String payloadJson) {
+        System.debug(LoggingLevel.INFO, '=== processPayload (Test Mode) ===');
+        System.debug(LoggingLevel.INFO, 'Payload: ' + payloadJson);
+
+        // Build mock headers
+        Map<String, Object> baseHeaders = new Map<String, Object>{
+            'EventType' => 'TEST_EVENT',
+            'EventUuid' => 'test-' + Datetime.now().getTime(),
+            'EventCreationDateTime' => String.valueOf(Datetime.now()),
+            'EventPublishDateTime' => String.valueOf(Datetime.now()),
+            'EventSchemaVersion' => '1.0',
+            'EventPrompt' => null,
+            'ReplayId' => 'test-replay',
+            'ActionDeveloperName' => 'TestAction',
+            'SourceObjectDeveloperName' => 'Case',
+            'ProfileIdValue' => null,
+            'TraceIdValue' => null,
+            'Offset' => null
+        };
+
+        // Call LLM (CALLOUT)
+        EventProcessingResult llmResult = callLLMForSearchContext(payloadJson, baseHeaders);
+
+        System.debug(LoggingLevel.INFO, '=== LLM Response ===');
+        if (llmResult.response != null) {
+            System.debug(LoggingLevel.INFO, 'Success: ' + llmResult.response.success);
+            System.debug(LoggingLevel.INFO, 'Intent: ' + llmResult.response.intentCategory);
+            System.debug(LoggingLevel.INFO, 'Keywords: ' + llmResult.response.keywords);
+            System.debug(LoggingLevel.INFO, 'Search Context: ' + llmResult.response.searchContext);
+        }
+
+        // DML Phase - Update Case
+        List<Case> casesToUpdate = new List<Case>();
+        Case caseUpdate = buildCaseUpdateWithClassification(llmResult.caseId, llmResult.response, llmResult.eventTimestamp);
+        if (caseUpdate != null) {
+            casesToUpdate.add(caseUpdate);
+        }
+
+        // Build debug log
+        List<Debug_Log__c> logsToInsert = new List<Debug_Log__c>();
+        Debug_Log__c searchContextLog = buildSearchContextDebugLog(llmResult);
+        logsToInsert.add(searchContextLog);
+
+        // Bulk update Cases
+        if (!casesToUpdate.isEmpty()) {
+            List<Database.SaveResult> caseResults = Database.update(casesToUpdate, false);
+            for (Integer i = 0; i < caseResults.size(); i++) {
+                if (caseResults[i].isSuccess()) {
+                    System.debug(LoggingLevel.INFO, 'Successfully updated Case: ' + casesToUpdate[i].Id);
+                } else {
+                    for (Database.Error err : caseResults[i].getErrors()) {
+                        System.debug(LoggingLevel.ERROR, 'Error updating Case: ' + err.getMessage());
+                    }
+                }
+            }
+        }
+
+        // Insert debug logs
+        if (!logsToInsert.isEmpty()) {
+            Database.insert(logsToInsert, false);
+        }
+
+        System.debug(LoggingLevel.INFO, '=== processPayload Complete ===');
+    }
+
     public static void processEvents(List<DataObjectDataChgEvent> events) {
         System.debug(LoggingLevel.DEBUG, 'DataCloudDataChangeEventController.processEvents - events: ' + events);
 
